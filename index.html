@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>女巫的毒药</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 模式选择 -->
+    <div id="mode-selection-screen" class="screen active">
+        <h1>女巫的毒药</h1>
+        <div class="form-container">
+            <button id="single-player-btn">单机模式</button>
+            <button id="multiplayer-btn">联机模式</button>
+        </div>
+    </div>
+
+    <!-- 玩家名字输入 -->
+    <div id="username-screen" class="screen">
+        <h2>请输入你的名字</h2>
+        <div class="form-container">
+            <input type="text" id="username" placeholder="玩家名">
+            <button id="confirm-username-btn">确定</button>
+        </div>
+    </div>
+    
+    <!-- 联机大厅 -->
+    <div id="online-lobby-screen" class="screen">
+        <h2>联机大厅</h2>
+        <p>你好, <span id="online-player-name"></span>!</p>
+        <div class="form-container">
+            <button id="online-create-room-btn">创建房间</button>
+            <div class="join-room-container">
+                <input type="text" id="room-id-input" placeholder="输入房间号">
+                <button id="online-join-room-btn">加入房间</button>
+            </div>
+        </div>
+        <div id="room-info" style="display:none;">
+            <h3>房间号: <span id="room-id-display"></span></h3>
+            <h4>玩家列表:</h4>
+            <ul id="player-list"></ul>
+            
+            <!-- START: New Game Settings for Host -->
+            <div id="online-game-settings" style="display:none;">
+                <label for="online-grid-size">棋盘大小 (e.g., 5 for 5x5):</label>
+                <input type="number" id="online-grid-size" min="3" max="10" value="5">
+            </div>
+            <!-- END: New Game Settings for Host -->
+
+            <button id="start-game-btn">开始游戏 (仅房主)</button>
+            <button id="exit-room-btn" class="btn-danger">退出房间</button>
+        </div>
+        <button class="back-to-home-btn">返回主页</button>
+    </div>
+
+    <!-- 单机模式房间创建 -->
+    <div id="single-player-room-screen" class="screen">
+        <h2>创建单机游戏</h2>
+        <div class="form-container">
+            <label for="player-count">人数 (2-3):</label>
+            <input type="number" id="player-count" min="2" max="3" value="2">
+            <label for="grid-size">棋盘大小 (e.g., 5 for 5x5):</label>
+            <input type="number" id="grid-size" min="3" max="10" value="5">
+            <button id="create-single-player-game-btn">开始游戏</button>
+        </div>
+        <button class="back-to-home-btn">返回主页</button>
+    </div>
+
+    <!-- 游戏主界面 (共用) -->
+    <div id="game-screen" class="screen">
+        <div id="game-info">
+            <p id="game-status"></p>
+        </div>
+        <div id="game-board"></div>
+        <div id="game-controls">
+            <button id="roll-dice-btn" style="display: none;">投骰子</button>
+            <p id="dice-result"></p>
+        </div>
+        <div id="game-over-screen" style="display: none;">
+            <h2 id="winner-message"></h2>
+            <button id="play-again-btn">返回大厅</button>
+        </div>
+        <button class="back-to-home-btn">退出游戏</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
